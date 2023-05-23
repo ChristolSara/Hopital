@@ -18,8 +18,8 @@
                     <div class="p-3">
                         <form th:action="@{/savePatient}" method="post">
                             <div class="mb-2">
-                                <label class="form-label">ID</label>
-                                <input type="text" name="id" class="form-control" th:value="${patient.id}">
+                                <label class="form-label">ID</label><label th:text="${patient.id}"></label>
+                                <input type="hidden" name="id" class="form-control" th:value="${patient.id}">
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Name</label>

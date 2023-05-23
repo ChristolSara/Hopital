@@ -2,6 +2,7 @@ package fr.greta.Hopital.Hopital.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,8 @@ import java.util.Date;
 public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty @Size(min= 2 , max = 23)
+    @NotBlank
+    @Size(min= 2 , max = 23)
     private String name;
     @Temporal(TemporalType.DATE)//pour stoker que la date et non le temp
     private Date dateNaissance;
