@@ -3,6 +3,7 @@ package fr.greta.Hopital.Hopital.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +16,7 @@ import static org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true) //potection basé sur globale method security
 public class SecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -40,8 +42,8 @@ public class SecurityConfig {
 
                    http.formLogin();
                    //donner l'authorisation  de supp que à l'admin
-                   http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN");
-                   http.authorizeHttpRequests().requestMatchers("/user/**").hasAnyRole("USER");
+//                   http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN");
+//                   http.authorizeHttpRequests().requestMatchers("/user/**").hasAnyRole("USER");
                    http.authorizeHttpRequests().anyRequest().authenticated();
                    //envoyer vers une page d'erreur
                    http.exceptionHandling().accessDeniedPage("/403");
