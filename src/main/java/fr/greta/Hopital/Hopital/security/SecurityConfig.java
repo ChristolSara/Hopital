@@ -32,20 +32,18 @@ public class SecurityConfig {
         );
         return inMemoryUserDetailsManager;
     }
-    //pour cripter le password
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-                   http
-                          .authorizeHttpRequests()
-                          .anyRequest().authenticated()
-                          .formLogin()
-                          .build();
+                   http.formLogin();
+                   http.authorizeHttpRequests().anyRequest().authenticated();
+
+                       return    http.build();
     }
+
+
 
 }
