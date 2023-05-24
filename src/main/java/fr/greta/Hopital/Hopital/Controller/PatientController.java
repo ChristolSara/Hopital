@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PatientController {
     private PatientRepository patientRepository;
 
-    @GetMapping("/index")
+    @GetMapping("/user/index")
     public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "0") int p,
                         @RequestParam(name = "size", defaultValue = "4") int s,
@@ -34,36 +34,36 @@ public class PatientController {
         return "patients";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(@RequestParam(
             name = "id") Long id,
                          @RequestParam(name = "keyword", defaultValue = "") String keyword,
                          @RequestParam(name = "page", defaultValue = "0") int page) {
         patientRepository.deleteById(id);
-        return "redirect:/index?page=" + page + "&keyword=" + keyword;
+        return "redirect:/user/index?page=" + page + "&keyword=" + keyword;
     }
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 
-    @GetMapping("/formPatients")
+    @GetMapping("/admin/formPatients")
     public String formPatient(Model model) {
         model.addAttribute("patient", new Patient());
         return "formPatients";
     }
 
-    @PostMapping("/savePatient")
+    @PostMapping("/admin/savePatient")
     public String savePatient(@Valid Patient patient, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "formPatients";
         }
         patientRepository.save(patient);
-        return "redirect:/index?keyword=" + patient.getName();
+        return "redirect:/user/index?keyword=" + patient.getName();
     }
 
-    @GetMapping("/editPatient")
+    @GetMapping("/admin/editPatient")
     public String editPatient(Model model, @RequestParam(name = "id") Long id) {
         Patient patient = patientRepository.findById(id).get();
         model.addAttribute("patient", patient);

@@ -39,7 +39,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
                    http.formLogin();
+                   //donner l'authorisation  de supp que à l'admin
+                   http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN");
+                   http.authorizeHttpRequests().requestMatchers("/user/**").hasAnyRole("USER");
                    http.authorizeHttpRequests().anyRequest().authenticated();
+                   //envoyer vers une page d'erreur
+                   http.exceptionHandling().accessDeniedPage("/403");
 
                        return    http.build();
     }
