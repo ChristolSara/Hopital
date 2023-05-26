@@ -57,9 +57,8 @@ public class SecurityConfig {
 
                    http.formLogin();
 
-                   http.authorizeHttpRequests().requestMatchers("/webjars/**","/h2-console/").permitAll();
                    //donner l'authorisation  de supp que à l'admin
-//                   http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN");
+                  //http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN");
 //                   http.authorizeHttpRequests().requestMatchers("/user/**").hasAnyRole("USER");
                    http.authorizeHttpRequests().anyRequest().authenticated();
 
