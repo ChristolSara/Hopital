@@ -4,5 +4,5 @@ import fr.greta.Hopital.Hopital.Model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppUserRepository extends JpaRepository<AppUser,String> {
-    AppUser findByUserName(String username);
+    AppUser findByUsername(String username);
 }
